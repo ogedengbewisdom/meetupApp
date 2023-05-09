@@ -3,10 +3,10 @@ import { useRouter } from 'next/router';
 import Card from '../ui/Card';
 import classes from './MeetupItem.module.css';
 
-function MeetupItem(props) {
+const MeetupItem = (props) => {
   const router = useRouter();
 
-  function showDetailsHandler() {
+const showDetailsHandler = () => {
     router.push('/' + props.id);
   }
 
