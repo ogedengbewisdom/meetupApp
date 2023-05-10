@@ -15,6 +15,8 @@ const Dummy = [
         address: "UK"
     }
 ]
+
+
 const HomePage = ({meetups}) => {
 
     return (
@@ -26,7 +28,8 @@ export const getStaticProps = async () => {
     return {
         props: {
             meetups : Dummy
-        }
+        },
+        revalidate: 1
     }
 }
 
