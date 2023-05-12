@@ -4,7 +4,7 @@ import { MongoClient } from "mongodb";
 // POST api/new_meetup
 
 const handler = async (req, res) => {
-    const url = `mongodb+srv://wisdom:Wisdom123456@meetupcluster.sv1bwgc.mongodb.net/?retryWrites=true&w=majority`
+    const url = `mongodb+srv://ogedengbewisdom1994:Test123456@cluster0.lqyedd0.mongodb.net/meetups?retryWrites=true&w=majority`
     
     if (req.method === "POST") {
         const data = req.body;
