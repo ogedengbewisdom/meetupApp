@@ -4,9 +4,11 @@ import { MongoClient } from "mongodb";
 // POST api/new_meetup
 
 const handler = async (req, res) => {
+    const url = `mongodb+srv://wisdom:Wisdom123456@meetupcluster.sv1bwgc.mongodb.net/?retryWrites=true&w=majority`
+    
     if (req.method === "POST") {
         const data = req.body;
-        const client = await MongoClient.connect("mongodb+srv://wisdom:strongPassword12?@cluster0.pmy6q3x.mongodb.net/meetups?retryWrites=true&w=majority");
+        const client = await MongoClient.connect(url);
         const db = client.db();
         const meetupCollection = db.collection("meetups");
         const result = await meetupCollection.insertOne(data);
