@@ -1,33 +1,30 @@
 
-import MeetupList from "../components/meetups/MeetupList"
+import MeetupList from "../components/meetups/MeetupList";
+import { MongoClient } from "mongodb";
 
-const Dummy = [
-    {
-        id: "o3",
-        image: "https://cdn.punchng.com/wp-content/uploads/2023/03/22193431/Tafawa-square-entrance.jpg",
-        title: "TimeLess Concert",
-        address: "Lagos, Nigeria"
-    },
-    {
-        id: "u3",
-        image: "https://upload.wikimedia.org/wikipedia/commons/6/69/O2_Arena.jpg",
-        title: "Raver concert",
-        address: "UK"
-    }
-]
-
-
-const HomePage = ({meetups}) => {
+const HomePage = (props) => {
 
     return (
-        <MeetupList meetups={meetups} />
+        <MeetupList meetups={props.meetups} />
     )
 }
 
 export const getStaticProps = async () => {
+    
+    const url = `mongodb+srv://wisdom:Wisdom123456@meetupcluster.sv1bwgc.mongodb.net/?retryWrites=true&w=majority`;
+    const client = await MongoClient.connect(url);
+    const db = client.db();
+    const meetupCollection = db.collection("meetups");
+    const meetups = await meetupCollection.find().toArray();
+    client.close()
     return {
         props: {
-            meetups : Dummy
+            meetups : meetups.map(meetup => ({
+                title: meetup.title,
+                image: meetup.image,
+                address: meetup.address,
+                id: meetup._id.toString()
+            }))
         },
         revalidate: 1
     }
