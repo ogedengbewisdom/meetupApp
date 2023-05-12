@@ -11,7 +11,7 @@ const HomePage = (props) => {
 
 export const getStaticProps = async () => {
     
-    const url = `mongodb+srv://wisdom:Wisdom123456@meetupcluster.sv1bwgc.mongodb.net/?retryWrites=true&w=majority`;
+    const url = `mongodb+srv://ogedengbewisdom1994:Test123456@cluster0.lqyedd0.mongodb.net/meetups?retryWrites=true&w=majority`;
     const client = await MongoClient.connect(url);
     const db = client.db();
     const meetupCollection = db.collection("meetups");
@@ -23,6 +23,7 @@ export const getStaticProps = async () => {
                 title: meetup.title,
                 image: meetup.image,
                 address: meetup.address,
+                description: meetup.description,
                 id: meetup._id.toString()
             }))
         },
