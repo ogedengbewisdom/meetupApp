@@ -34,13 +34,13 @@ export const getStaticProps = async (context) => {
     const client = await MongoClient.connect(url);
     const db = client.db();
     const meetupCollection = db.collection("meetups");
-    const selectedMeetup = await meetupCollection.findOne({_id: ObjectId(meetupId)})
+    const selectedMeetup = await meetupCollection.findOne({_id: new ObjectId(meetupId)})
     client.close()
     console.log(meetupId);
     return {
         props: {
             meetups: {
-                id: selectedMeetup.meetupId.toString(),
+                id: selectedMeetup._id.toString(),
                 title: selectedMeetup.title,
                 address : selectedMeetup.address,
                 image : selectedMeetup.image,
