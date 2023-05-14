@@ -1,11 +1,18 @@
 import MeetupDetail from "../../components/meetups/MeetupDetail"
 import { MongoClient, ObjectId } from "mongodb"
+import Head from "next/head"
+import { Fragment } from "react"
 
 
 const MeetupDetailPage = ({meetups}) => {
     return (
-        <MeetupDetail meetups={meetups}
-        />
+        <Fragment>
+            <Head>
+                <title>{meetups.title}</title>
+                <meta name="description" content="Details of a specific meetup" />
+            </Head>
+        <MeetupDetail meetups={meetups} />
+        </Fragment>
     )
 }
 
@@ -29,7 +36,7 @@ export const getStaticPaths = async () => {
 
 
 export const getStaticProps = async (context) => {
-    const meetupId = context.params.meetupId
+    const {meetupId} = context.params
     const url = `mongodb+srv://ogedengbewisdom1994:Test123456@cluster0.lqyedd0.mongodb.net/meetups?retryWrites=true&w=majority`;
     const client = await MongoClient.connect(url);
     const db = client.db();
