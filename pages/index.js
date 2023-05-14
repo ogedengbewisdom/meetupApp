@@ -1,11 +1,18 @@
-
+import Head from "next/head"
 import MeetupList from "../components/meetups/MeetupList";
 import { MongoClient } from "mongodb";
+import { Fragment } from "react";
 
 const HomePage = (props) => {
 
     return (
-        <MeetupList meetups={props.meetups} />
+        <Fragment>
+            <Head>
+                <title>Meetup List</title>
+                <meta name="description" content="Browse a highly important list of tech meetup" />
+            </Head>
+            <MeetupList meetups={props.meetups} />
+        </Fragment>
     )
 }
 
